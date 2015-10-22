@@ -54,20 +54,37 @@ try:
     README = f.read()
 finally:
     f.close()    
-    
-setup (name = 'ujson',
-       version = get_version(),
-       description = "Ultra fast JSON encoder and decoder for Python",
-       long_description = README,
-       ext_modules = [module1],
-       author="Jonas Tarnstrom",
-       author_email="jonas.tarnstrom@esn.me",
-       download_url="http://github.com/esnme/ultrajson",
-       license="BSD License",
-       platforms=['any'],      
-       url="http://www.esn.me",
-       classifiers=CLASSIFIERS,
-       )
+
+try:
+    setup (name = 'ujson',
+           version = get_version(),
+           description = "Ultra fast JSON encoder and decoder for Python",
+           long_description = README,
+           ext_modules = [module1],
+           author="Jonas Tarnstrom",
+           author_email="jonas.tarnstrom@esn.me",
+           download_url="http://github.com/esnme/ultrajson",
+           license="BSD License",
+           platforms=['any'],
+           url="http://www.esn.me",
+           classifiers=CLASSIFIERS,
+           )
+except:
+    print "Uh oh, building with the CExtension failed. ujson capability not present, but " \
+          "we'll fall back to the builtin json module."
+
+    setup (name = 'ujson',
+           version = get_version(),
+           description = "Ultra fast JSON encoder and decoder for Python",
+           long_description = README,
+           author="Jonas Tarnstrom",
+           author_email="jonas.tarnstrom@esn.me",
+           download_url="http://github.com/esnme/ultrajson",
+           license="BSD License",
+           platforms=['any'],
+           py_modules=['ujson'],
+           url="http://www.esn.me",
+           classifiers=CLASSIFIERS,)
 
 if sys.version_info[0] >= 3:
     print( "*" * 100)
